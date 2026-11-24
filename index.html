@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مسارك الذكي | Smart Path — منصة التوجيه المهني بالذكاء الاصطناعي</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #060913;
+      --bg-surface: #0f172a;
+      --bg-card: #162033;
+      --border: rgba(148, 163, 184, 0.16);
+      --primary: #6366f1;
+      --cyan: #06b6d4;
+      --emerald: #10b981;
+      --rose: #f43f5e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      min-height: 100vh;
+      background-image:
+        radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.14), transparent 35%),
+        radial-gradient(circle at 85% 80%, rgba(6, 182, 212, 0.12), transparent 35%);
+    }
+
+    .navbar {
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.25rem;
+      font-weight: 900;
+    }
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--primary), var(--cyan));
+      display: grid;
+      place-items: center;
+      font-size: 1.1rem;
+    }
+
+    .brand span {
+      background: linear-gradient(90deg, #fff, #93c5fd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .xp-pill {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 800;
+    }
+
+    .btn {
+      padding: 11px 18px;
+      border-radius: 12px;
+      border: none;
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--cyan));
+      color: #fff;
+    }
+
+    .btn-primary:hover { transform: translateY(-1px); }
+
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+    }
+
+    .input-group { margin-bottom: 14px; }
+    .input-group label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-bottom: 6px;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(6, 9, 19, 0.85);
+      color: #fff;
+      font-size: 0.95rem;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--cyan);
+    }
+
+    .auth-container {
+      max-width: 1050px;
+      margin: 36px auto;
+      padding: 0 18px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    @media (max-width: 850px) {
+      .auth-container { grid-template-columns: 1fr; margin: 18px auto; }
+    }
+
+    .hero-info h1 {
+      font-size: 2.1rem;
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 14px;
+    }
+
+    .hero-info h1 mark { background: none; color: var(--cyan); }
+    .hero-info p { color: var(--text-muted); margin-bottom: 20px; }
+
+    .feature-pills {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .f-pill {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .auth-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+    }
+
+    .auth-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--bg-main);
+      padding: 5px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .auth-tab {
+      padding: 9px;
+      border-radius: 9px;
+      text-align: center;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .auth-tab.active { background: var(--primary); color: #fff; }
+
+    .alert-msg {
+      margin-top: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      text-align: center;
+    }
+
+    .alert-error {
+      background: rgba(244, 63, 94, 0.15);
+      border: 1px solid rgba(244, 63, 94, 0.4);
+      color: #fda4af;
+    }
+
+    .alert-ok {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #6ee7b7;
+    }
+
+    .dashboard {
+      max-width: 1120px;
+      margin: 22px auto;
+      padding: 0 16px;
+    }
+
+    .welcome-banner {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(6, 182, 212, 0.15));
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      border-radius: 18px;
+      padding: 18px 22px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .nav-tab {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .nav-tab.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+    }
+
+    .panel h2 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      color: #38bdf8;
+    }
+
+    .q-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 16px;
+      border-radius: 14px;
+      margin-bottom: 14px;
+    }
+
+    .q-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .q-opt {
+      background: var(--bg-main);
+      border: 1px solid var(--border);
+      padding: 11px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+    }
+
+    .progress-track {
+      height: 12px;
+      background: var(--bg-main);
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 10px 0 18px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--emerald));
+      transition: width 0.35s ease;
+    }
+
+    .road-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 14px 16px;
+      border-radius: 14px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .road-card small {
+      display: block;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .project-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 700px) {
+      .project-form-grid { grid-template-columns: 1fr; }
+    }
+
+    .project-list {
+      margin-top: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .proj-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 14px 16px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .market-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .m-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .m-tag {
+      display: inline-block;
+      background: rgba(6, 182, 212, 0.15);
+      color: var(--cyan);
+      padding: 3px 10px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .chat-box {
+      background: var(--bg-main);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      height: 300px;
+      overflow-y: auto;
+      margin: 12px 0;
+    }
+
+    .chat-msg {
+      margin-bottom: 12px;
+      padding: 11px 14px;
+      border-radius: 12px;
+      line-height: 1.7;
+      font-size: 0.92rem;
+    }
+
+    .chat-user {
+      background: rgba(99, 102, 241, 0.18);
+      border: 1px solid rgba(99, 102, 241, 0.35);
+    }
+
+    .chat-ai {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      color: #e2e8f0;
+    }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="brand">
+      <div class="brand-icon">🚀</div>
+      <span>مسارك الذكي | Smart Path</span>
+    </div>
+    <div class="nav-user hidden" id="navUserArea">
+      <span class="xp-pill" id="xpDisplay">0 XP</span>
+      <button class="btn btn-secondary" id="logoutBtn" style="padding: 7px 14px; font-size: 0.85rem;">تسجيل خروج</button>
+    </div>
+  </nav>
+
+  <!-- AUTH VIEW -->
+  <section id="authSection" class="auth-container">
+    <div class="hero-info">
+      <h1>اكتشف مسارك المهني واربط مهاراتك <mark>بسوق العمل الحقيقي</mark></h1>
+      <p>منصة ذكية متكاملة تساعد الطلاب والشباب على تحديد تخصصهم الأنسب، بناء خريطة تعلّم عملية، وتوثيق مشاريعهم في ملف أعمال احترافي.</p>
+      <div class="feature-pills">
+        <div class="f-pill">🧠 تحليل ميول ذكي</div>
+        <div class="f-pill">🗺️ خرائط تعلّم تفاعلية</div>
+        <div class="f-pill">📊 رادار وظائف السوق الحي</div>
+        <div class="f-pill">💼 محاكي مشاريع و Portfolio</div>
+      </div>
+    </div>
+
+    <div class="auth-box">
+      <div class="auth-tabs">
+        <div class="auth-tab active" id="tabLoginMode" onclick="setAuthMode('login')">تسجيل الدخول</div>
+        <div class="auth-tab" id="tabSignupMode" onclick="setAuthMode('signup')">إنشاء حساب جديد</div>
+      </div>
+
+      <form id="authForm">
+        <div id="signupFields" class="hidden">
+          <div class="input-group">
+            <label>الاسم الكامل</label>
+            <input type="text" id="fullNameInput" class="input-field" placeholder="مثال: مكاريوس ماهر" />
+          </div>
+          <div class="input-group">
+            <label>المرحلة الدراسية / الحالة</label>
+            <select id="stageInput" class="input-field">
+              <option value="طالب ثانوي">طالب مرحلة ثانوية</option>
+              <option value="طالب جامعي">طالب جامعي</option>
+              <option value="خريج / باحث عن عمل">خريج / تغيير مسار مهني</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>البريد الإلكتروني</label>
+          <input type="email" id="emailInput" class="input-field" placeholder="name@example.com" required />
+        </div>
+
+        <div class="input-group">
+          <label>كلمة المرور</label>
+          <input type="password" id="passwordInput" class="input-field" placeholder="6 أحرف على الأقل" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%;" id="authSubmitBtn">دخول إلى المنصة</button>
+      </form>
+
+      <div id="authAlert" class="alert-msg hidden"></div>
+    </div>
+  </section>
+
+  <!-- DASHBOARD VIEW -->
+  <main id="dashboardSection" class="dashboard hidden">
+    <div class="welcome-banner">
+      <div>
+        <h2 id="welcomeTitle" style="font-size: 1.3rem;">أهلاً بك في مسارك الذكي 👋</h2>
+        <p id="welcomeSub" style="color: var(--text-muted); font-size: 0.9rem;">ابدأ باختبار تحديد المسار أو تابع تقدمك في خريطة التعلّم</p>
+      </div>
+      <span class="xp-pill" id="activeTrackBadge">المسار الحالي: تطوير الويب</span>
+    </div>
+
+    <div class="nav-tabs">
+      <button class="nav-tab active" onclick="openPanel('panelQuiz', this)">🧠 اختبار تحديد المسار</button>
+      <button class="nav-tab" onclick="openPanel('panelRoadmap', this)">🗺️ خريطة التعلّم</button>
+      <button class="nav-tab" onclick="openPanel('panelProjects', this)">💼 محاكي المشاريع (Portfolio)</button>
+      <button class="nav-tab" onclick="openPanel('panelMarket', this)">📊 رادار سوق العمل</button>
+      <button class="nav-tab" onclick="openPanel('panelMentor', this)">🤖 المرشد الذكي</button>
+    </div>
+
+    <!-- PANEL 1: QUIZ -->
+    <div id="panelQuiz" class="panel">
+      <h2>محرك تحليل الشخصيات والمهارات (AI Career Matcher)</h2>
+      <p style="color: var(--text-muted); margin-bottom: 16px;">أجب بدقة ليقوم النظام بحساب نسبة التوافق مع أنسب 3 مسارات تقنية:</p>
+
+      <div class="q-block">
+        <strong>1. ما أكثر شيء يجذب انتباهك عند استخدام أي موقع أو تطبيق؟</strong>
+        <div class="q-options">
+          <label class="q-opt"><input type="radio" name="q1" value="web" checked> سرعة الموقع وترابط صفحاته</label>
+          <label class="q-opt"><input type="radio" name="q1" value="ui"> تناسق الألوان وسهولة التصميم</label>
+          <label class="q-opt"><input type="radio" name="q1" value="ai"> الاقتراحات الذكية وتحليل البيانات</label>
+          <label class="q-opt"><input type="radio" name="q1" value="mobile"> تجربة الاستخدام السلسة على الهاتف</label>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <strong>2. كيف تفضل حل المشكلات التقنية؟</strong>
+        <div class="q-options">
+          <label class="q-opt"><input type="radio" name="q2" value="ai" checked> تحليل البيانات والبحث عن أنماط منطقية</label>
+          <label class="q-opt"><input type="radio" name="q2" value="web"> كتابة كود وبناء حل عملي متكامل</label>
+          <label class="q-opt"><input type="radio" name="q2" value="ui"> رسم مخطط بصري يوضح رحلة المستخدم</label>
+          <label class="q-opt"><input type="radio" name="q2" value="mobile"> تطوير ميزة تعمل مباشرة على الموبايل</label>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <strong>3. ما نوع المشاريع التي تتحمس لتنفيذها؟</strong>
+        <div class="q-options">
+          <label class="q-opt"><input type="radio" name="q3" value="web" checked> منصة ويب متكاملة بلوحة تحكم</label>
+          <label class="q-opt"><input type="radio" name="q3" value="mobile"> تطبيق أندرويد أو iOS يخدم الطلاب</label>
+          <label class="q-opt"><input type="radio" name="q3" value="ai"> نموذج ذكاء اصطناعي للتنبؤ والتصنيف</label>
+          <label class="q-opt"><input type="radio" name="q3" value="ui"> هوية بصرية وتصميم واجهات تطبيقات</label>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" id="analyzeBtn">تحليل النتيجة واعتماد المسار ✨</button>
+
+      <div id="quizOutput" class="hidden" style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);">
+        <h3 style="margin-bottom: 12px;">أعلى 3 مسارات متوافقة معك:</h3>
+        <div id="matchResultsList"></div>
+      </div>
+    </div>
+
+    <!-- PANEL 2: ROADMAP -->
+    <div id="panelRoadmap" class="panel hidden">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+        <h2 id="roadmapHeading">خريطة تعلّم: تطوير الويب الشامل</h2>
+        <span class="xp-pill" id="roadmapPctText">الإنجاز: 0%</span>
+      </div>
+      <p style="color: var(--text-muted);">أكمل المهارات خطوة بخطوة لرفع نقاطك وتجهيز ملفك الشخصي:</p>
+      <div class="progress-track">
+        <div class="progress-fill" id="roadmapBar" style="width: 0%;"></div>
+      </div>
+      <div id="roadmapStepsContainer"></div>
+    </div>
+
+    <!-- PANEL 3: PORTFOLIO / PROJECTS -->
+    <div id="panelProjects" class="panel hidden">
+      <h2>محاكي المشاريع العملية (Portfolio Builder)</h2>
+      <p style="color: var(--text-muted); margin-bottom: 14px;">أضف مشاريعك العملية وروابطها لحفظها في ملفك الشخصي (+250 XP لكل مشروع):</p>
+
+      <form id="projectForm" class="project-form-grid">
+        <input type="text" id="projTitleInput" class="input-field" placeholder="اسم المشروع (مثلاً: موقع متجر)" required />
+        <input type="text" id="projLinkInput" class="input-field" placeholder="رابط GitHub أو معاينة (اختياري)" />
+        <button type="submit" class="btn btn-primary" id="addProjBtn">إضافة للملف</button>
+      </form>
+
+      <div id="projFeedback" class="alert-msg hidden"></div>
+      <div class="project-list" id="portfolioList"></div>
+    </div>
+
+    <!-- PANEL 4: MARKET -->
+    <div id="panelMarket" class="panel hidden">
+      <h2>رادار سوق العمل الحي (Live Job Market Radar)</h2>
+      <p style="color: var(--text-muted);">مؤشرات الطلب الحقيقية والمهارات المطلوبة في الشركات ومنصات العمل الحر:</p>
+      <div class="market-cards">
+        <div class="m-card">
+          <span class="m-tag">طلب مرتفع جداً 🔥</span>
+          <h3>تطوير الويب (Full-Stack)</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin: 8px 0;">فرص العمل الحر: +4,500 مشروع نشط</p>
+          <p style="font-size: 0.88rem;"><strong>المهارات:</strong> HTML, CSS, JS, React, Firebase</p>
+        </div>
+        <div class="m-card">
+          <span class="m-tag">نمو متسارع 🚀</span>
+          <h3>الذكاء الاصطناعي والبيانات</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin: 8px 0;">فرص العمل الحر: +2,900 مشروع نشط</p>
+          <p style="font-size: 0.88rem;"><strong>المهارات:</strong> Python, SQL, LLMs, Data Analysis</p>
+        </div>
+        <div class="m-card">
+          <span class="m-tag">طلب مستمر 📱</span>
+          <h3>تطوير تطبيقات الموبايل</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin: 8px 0;">فرص العمل الحر: +3,200 مشروع نشط</p>
+          <p style="font-size: 0.88rem;"><strong>المهارات:</strong> Flutter, React Native, Firebase</p>
+        </div>
+        <div class="m-card">
+          <span class="m-tag">إبداعي ومطلوب 🎨</span>
+          <h3>تصميم واجهات UI/UX</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin: 8px 0;">فرص العمل الحر: +2,600 مشروع نشط</p>
+          <p style="font-size: 0.88rem;"><strong>المهارات:</strong> Figma, Prototyping, User Research</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 5: SMART MENTOR -->
+    <div id="panelMentor" class="panel hidden">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <h2>مساعد التوجيه الشخصي (AI Career Mentor)</h2>
+        <span style="font-size:0.8rem; color:var(--text-muted);" id="aiModeLabel">الوضع: ذكاء محلي متقدم (أضف Gemini API Key لتفعيل الذكاء السحابي المباشر)</span>
+      </div>
+
+      <div class="input-group" style="margin-top:10px; margin-bottom:10px;">
+        <input type="password" id="geminiKeyInput" class="input-field" placeholder="اختياري: الصق Gemini API Key هنا للحصول على ردود AI حية" style="padding:9px 12px; font-size:0.85rem;" />
+      </div>
+
+      <div class="chat-box" id="mentorChatLog">
+        <div class="chat-msg chat-ai">
+          <strong>الموجه الذكي:</strong> أهلاً بك! اسألني أي سؤال عن المهن والتخصصات (مثل هندسة البترول، البرمجة، الذكاء الاصطناعي)، سوق العمل، خطط المذاكرة، أو إزاي تبني مشاريعك.
+        </div>
+      </div>
+
+      <form id="mentorForm" style="display: flex; gap: 10px;">
+        <input type="text" id="mentorQueryInput" class="input-field" placeholder="اكتب سؤالك هنا..." required />
+        <button type="submit" class="btn btn-primary" id="askMentorBtn">إرسال</button>
+      </form>
+    </div>
+  </main>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      onAuthStateChanged,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+    import {
+      getFirestore,
+      doc,
+      setDoc,
+      getDoc
+    } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+    // بيانات مشروعك الحقيقية مربوطة وجاهزة
+    const firebaseConfig = {
+      apiKey: "AIzaSyA3jiWO41NbnUUDUwZu6Z0JZbWwFrmdX2I",
+      authDomain: "your-smart-path-21f11.firebaseapp.com",
+      projectId: "your-smart-path-21f11",
+      storageBucket: "your-smart-path-21f11.firebasestorage.app",
+      messagingSenderId: "960979370879",
+      appId: "1:960979370879:web:36c79491fa9a30f514104a",
+      measurementId: "G-4S84R0SLH7"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    let authMode = "login";
+    let userProfile = {
+      name: "",
+      stage: "طالب",
+      track: "web",
+      completedSteps: [],
+      projects: []
+    };
+
+    const ROADMAPS = {
+      web: {
+        title: "تطوير الويب الشامل (Full-Stack Web)",
+        steps: [
+          { title: "المستوى المبتدئ: بناء الهيكل والتصميم (HTML5 & CSS3)", time: "أسبوعان" },
+          { title: "المستوى المبتدئ: التفاعلية والمنطق البرمجي (JavaScript ES6)", time: "3 أسابيع" },
+          { title: "المستوى المتوسط: المصادقة وقواعد البيانات السحابية (Firebase)", time: "أسبوعان" },
+          { title: "المستوى المتقدم: بناء مشروع تخرج متكامل ورفعه أونلاين", time: "أسبوعان" }
+        ]
+      },
+      ai: {
+        title: "الذكاء الاصطناعي وتحليل البيانات",
+        steps: [
+          { title: "المستوى المبتدئ: أساسيات Python وهياكل البيانات", time: "3 أسابيع" },
+          { title: "المستوى المتوسط: تحليل البيانات باستخدام Pandas و NumPy", time: "3 أسابيع" },
+          { title: "المستوى المتوسط: أساسيات تعلم الآلة (Machine Learning)", time: "4 أسابيع" },
+          { title: "المستوى المتقدم: بناء نموذج ذكي ودمجه في تطبيق ويب", time: "أسبوعان" }
+        ]
+      },
+      ui: {
+        title: "تصميم واجهات وتجربة المستخدم (UI/UX)",
+        steps: [
+          { title: "المستوى المبتدئ: مبادئ التصميم البصري والألوان والخطوط", time: "أسبوعان" },
+          { title: "المستوى المتوسط: إتقان أداة Figma وبناء المكونات", time: "3 أسابيع" },
+          { title: "المستوى المتوسط: أبحاث المستخدمين ورسم التدفق (User Flow)", time: "أسبوعان" },
+          { title: "المستوى المتقدم: تصميم تطبيق كامل تفاعلي (Prototype)", time: "أسبوعان" }
+        ]
+      },
+      mobile: {
+        title: "تطوير تطبيقات الموبايل",
+        steps: [
+          { title: "المستوى المبتدئ: أساسيات البرمجة كائنية التوجه (OOP)", time: "أسبوعان" },
+          { title: "المستوى المتوسط: بناء الواجهات باستخدام Flutter / React Native", time: "4 أسابيع" },
+          { title: "المستوى المتوسط: ربط التطبيق بـ Firebase والإشعارات", time: "أسبوعان" },
+          { title: "المستوى المتقدم: تجهيز التطبيق للنشر على المتاجر", time: "أسبوع" }
+        ]
+      }
+    };
+
+    const savedGeminiKey = localStorage.getItem("smart_path_gemini_key") || "";
+    const geminiInput = document.getElementById("geminiKeyInput");
+    if (savedGeminiKey) {
+      geminiInput.value = savedGeminiKey;
+      document.getElementById("aiModeLabel").textContent = "الوضع: متصل بـ Gemini AI المباشر ⚡";
+    }
+    geminiInput.addEventListener("change", () => {
+      const val = geminiInput.value.trim();
+      localStorage.setItem("smart_path_gemini_key", val);
+      document.getElementById("aiModeLabel").textContent = val
+        ? "الوضع: متصل بـ Gemini AI المباشر ⚡"
+        : "الوضع: ذكاء محلي متقدم (أضف Gemini API Key لتفعيل الذكاء السحابي المباشر)";
+    });
+
+    window.setAuthMode = (mode) => {
+      authMode = mode;
+      document.getElementById("tabLoginMode").classList.toggle("active", mode === "login");
+      document.getElementById("tabSignupMode").classList.toggle("active", mode === "signup");
+      document.getElementById("signupFields").classList.toggle("hidden", mode === "login");
+      document.getElementById("authSubmitBtn").textContent = mode === "login" ? "دخول إلى المنصة" : "إنشاء حساب والبدء الآن";
+      document.getElementById("authAlert").classList.add("hidden");
+    };
+
+    function showAuthAlert(text, isError = true) {
+      const box = document.getElementById("authAlert");
+      box.textContent = text;
+      box.className = `alert-msg ${isError ? "alert-error" : "alert-ok"}`;
+    }
+
+    document.getElementById("authForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("emailInput").value.trim();
+      const password = document.getElementById("passwordInput").value;
+      const btn = document.getElementById("authSubmitBtn");
+      btn.disabled = true;
+
+      try {
+        if (authMode === "signup") {
+          const fullName = document.getElementById("fullNameInput").value.trim() || email.split("@")[0];
+          const stage = document.getElementById("stageInput").value;
+          const cred = await createUserWithEmailAndPassword(auth, email, password);
+
+          userProfile = {
+            name: fullName,
+            stage,
+            email,
+            track: "web",
+            completedSteps: [],
+            projects: []
+          };
+          await setDoc(doc(db, "students", cred.user.uid), userProfile);
+          showAuthAlert("تم إنشاء حسابك بنجاح! جاري الدخول...", false);
+        } else {
+          await signInWithEmailAndPassword(auth, email, password);
+        }
+      } catch (err) {
+        showAuthAlert("خطأ: " + err.message, true);
+      } finally {
+        btn.disabled = false;
+      }
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", () => signOut(auth));
+
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        document.getElementById("authSection").classList.add("hidden");
+        document.getElementById("dashboardSection").classList.remove("hidden");
+        document.getElementById("navUserArea").classList.remove("hidden");
+
+        try {
+          const snap = await getDoc(doc(db, "students", user.uid));
+          if (snap.exists()) {
+            userProfile = { ...userProfile, ...snap.data() };
+          } else {
+            userProfile.name = user.email.split("@")[0];
+          }
+        } catch (e) {
+          userProfile.name = user.email.split("@")[0];
+        }
+
+        refreshUI();
+      } else {
+        document.getElementById("authSection").classList.remove("hidden");
+        document.getElementById("dashboardSection").classList.add("hidden");
+        document.getElementById("navUserArea").classList.add("hidden");
+      }
+    });
+
+    async function saveProfileToCloud() {
+      const user = auth.currentUser;
+      if (!user) return;
+      try {
+        await setDoc(doc(db, "students", user.uid), userProfile, { merge: true });
+      } catch (e) {
+        console.warn("Firestore sync warning:", e);
+      }
+    }
+
+    function refreshUI() {
+      const road = ROADMAPS[userProfile.track] || ROADMAPS.web;
+      document.getElementById("welcomeTitle").textContent = `أهلاً بك يا ${userProfile.name} 👋`;
+      document.getElementById("welcomeSub").textContent = `المرحلة: ${userProfile.stage} — واصل بناء مهاراتك العملية`;
+      document.getElementById("activeTrackBadge").textContent = `المسار: ${road.title}`;
+
+      const xp = (userProfile.completedSteps.length * 100) + (userProfile.projects.length * 250);
+      document.getElementById("xpDisplay").textContent = `${xp} XP`;
+
+      renderRoadmap();
+      renderPortfolio();
+    }
+
+    document.getElementById("analyzeBtn").addEventListener("click", async () => {
+      const scores = { web: 40, ai: 40, ui: 40, mobile: 40 };
+      ["q1", "q2", "q3"].forEach((q) => {
+        const val = document.querySelector(`input[name="${q}"]:checked`)?.value;
+        if (val) scores[val] += 20;
+      });
+
+      const ranked = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+      userProfile.track = ranked[0][0];
+      userProfile.completedSteps = [];
+
+      const list = document.getElementById("matchResultsList");
+      list.innerHTML = ranked.slice(0, 3).map(([key, score]) => `
+        <div style="margin-bottom: 14px;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+            <strong>${ROADMAPS[key].title}</strong>
+            <span style="color: var(--emerald); font-weight:800;">نسبة التوافق ${score}%</span>
+          </div>
+          <div class="progress-track" style="margin:0; height:10px;">
+            <div class="progress-fill" style="width:${score}%"></div>
+          </div>
+        </div>
+      `).join("");
+
+      document.getElementById("quizOutput").classList.remove("hidden");
+      refreshUI();
+      await saveProfileToCloud();
+    });
+
+    function renderRoadmap() {
+      const road = ROADMAPS[userProfile.track] || ROADMAPS.web;
+      document.getElementById("roadmapHeading").textContent = `خريطة تعلّم: ${road.title}`;
+
+      const container = document.getElementById("roadmapStepsContainer");
+      container.innerHTML = road.steps.map((step, i) => {
+        const done = userProfile.completedSteps.includes(i);
+        return `
+          <div class="road-card">
+            <div>
+              <strong style="${done ? 'text-decoration: line-through; color: var(--text-muted);' : ''}">${step.title}</strong>
+              <small>المدة المقترحة للإنجاز: ${step.time} • (+100 XP)</small>
+            </div>
+            <input type="checkbox" ${done ? "checked" : ""} onchange="window.toggleSkill(${i})" style="width:22px; height:22px; accent-color: var(--emerald); cursor:pointer;" />
+          </div>
+        `;
+      }).join("");
+
+      const pct = Math.round((userProfile.completedSteps.length / road.steps.length) * 100);
+      document.getElementById("roadmapPctText").textContent = `الإنجاز: ${pct}%`;
+      document.getElementById("roadmapBar").style.width = `${pct}%`;
+    }
+
+    window.toggleSkill = async (idx) => {
+      if (userProfile.completedSteps.includes(idx)) {
+        userProfile.completedSteps = userProfile.completedSteps.filter((x) => x !== idx);
+      } else {
+        userProfile.completedSteps.push(idx);
+      }
+      refreshUI();
+      await saveProfileToCloud();
+    };
+
+    function showProjFeedback(msg, isErr = false) {
+      const fb = document.getElementById("projFeedback");
+      fb.textContent = msg;
+      fb.className = `alert-msg ${isErr ? "alert-error" : "alert-ok"}`;
+    }
+
+    document.getElementById("projectForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const title = document.getElementById("projTitleInput").value.trim();
+      let link = document.getElementById("projLinkInput").value.trim();
+
+      if (!title) {
+        showProjFeedback("اكتب اسم المشروع الأول.", true);
+        return;
+      }
+
+      if (link && !link.startsWith("http://") && !link.startsWith("https://")) {
+        link = "https://" + link;
+      }
+
+      if (!Array.isArray(userProfile.projects)) {
+        userProfile.projects = [];
+      }
+
+      userProfile.projects.push({
+        title,
+        link: link || "مشروع محلي / قيد الرفع",
+        addedAt: new Date().toLocaleDateString("ar-EG")
+      });
+
+      document.getElementById("projTitleInput").value = "";
+      document.getElementById("projLinkInput").value = "";
+
+      refreshUI();
+      await saveProfileToCloud();
+      showProjFeedback(`تمت إضافة "${title}" إلى ملفك بنجاح (+250 XP)!`, false);
+    });
+
+    function renderPortfolio() {
+      const list = document.getElementById("portfolioList");
+      const projects = userProfile.projects || [];
+      if (!projects.length) {
+        list.innerHTML = `<p style="color: var(--text-muted);">لم تقم بإضافة مشاريع عملية بعد. أضف أول مشروع لك لترفع نقاطك (+250 XP)!</p>`;
+        return;
+      }
+      list.innerHTML = projects.map((p, idx) => {
+        const hasUrl = p.link && p.link.startsWith("http");
+        return `
+          <div class="proj-item">
+            <div>
+              <strong>🚀 ${p.title}</strong>
+              <div style="font-size:0.85rem; color: var(--cyan); margin-top:2px;">
+                ${hasUrl ? `<a href="${p.link}" target="_blank" rel="noopener" style="color:var(--cyan); text-decoration:underline;">${p.link}</a>` : p.link}
+              </div>
+            </div>
+            <button type="button" class="btn btn-secondary" onclick="window.removeProj(${idx})" style="padding: 6px 12px; font-size:0.82rem;">حذف</button>
+          </div>
+        `;
+      }).join("");
+    }
+
+    window.removeProj = async (idx) => {
+      userProfile.projects.splice(idx, 1);
+      refreshUI();
+      await saveProfileToCloud();
+      showProjFeedback("تم حذف المشروع من ملفك.", false);
+    };
+
+    // محرك ردود ذكي ومفصل حسب موضوع السؤال الفعلي
+    function generateSmartLocalReply(question, trackKey) {
+      const q = question.toLowerCase();
+
+      if (q.includes("بترول") || q.includes("هندسه") || q.includes("هندسة") || q.includes("عماله") || q.includes("عمالة")) {
+        return `بخصوص **هندسة البترول وسوق العمل للعمالة والمهندسين المصريين**:<br>
+• **حجم الطلب:** قطاع البترول والغاز والصناعات الطاقة مجال حيوي ومستمر، وفيه فرص محلية (في شركات الإنتاج، الحفر، والخدمات البترولية) وفرص خارجية خاصة في الخليج، لكن المنافسة فيه عالية وبتعتمد على الكفاءة.<br>
+• **ما الذي يرفع فرصك فعلياً؟** إتقان اللغة الإنجليزية (خصوصاً المصطلحات الفنية)، التدريب العملي أو الخبرة الميدانية في المواقع/المعدات، والشهادات أو المهارات التكميلية (زي السلامة والصحة المهنية HSE أو تحليل البيانات الهندسية).<br>
+• **نصيحة عملية:** لا تعتمد على الكلية أو المسمى الوظيفي فقط؛ ابني مهارات عملية واضحة في سيرتك الذاتية وادخل تدريبات أو مشروعات حقيقية في المجال.`;
+      }
+
+      if (q.includes("ذكاء اصطناعي") || q.includes("ai") || q.includes("ماشين") || q.includes("تعلم الآلة") || q.includes("برمجه") || q.includes("برمجة")) {
+        return `**الذكاء الاصطناعي والبرمجة** من أكتر المجالات نمواً حالياً، لأنها بتدخل في تطوير المواقع والتطبيقات، تحليل البيانات، وأتمتة المهام:<br>
+• **كيف تبدأ صح؟** ابدأ بأساسيات البرمجة والمنطق (مثل Python أو JavaScript حسب هدفك)، ثم افهم إزاي البيانات بتتجهز وتتحلل أو إزاي تتعامل مع الـ APIs والنماذج الذكية.<br>
+• **أهم نقطة:** التطبيق العملي أهم من كثرة الكورسات؛ ابنِ مشاريع صغيرة حقيقية خطوة بخطوة.`;
+      }
+
+      if (q.includes("وقت") || q.includes("ضيق") || q.includes("مذاكرة") || q.includes("امتحان") || q.includes("ثانوية") || q.includes("بكالوريا")) {
+        return `لو **وقتك ضيق أو عندك دراسة وامتحانات**:<br>
+• خصص **30 إلى 45 دقيقة يومياً** بتركيز كامل بعيد عن المشتتات أفضل من ساعات متقطعة بلا تركيز.<br>
+• ركّز على هدف واحد واضح في الأسبوع (مذاكرة درس + تطبيق مثال واحد)، ومع اقتراب الامتحانات أولوية المنهج الدراسي بتكون رقم 1.`;
+      }
+
+      if (q.includes("فريلانس") || q.includes("عمل حر") || q.includes("فلوس") || q.includes("ربح") || q.includes("خمسات") || q.includes("سوق")) {
+        return `للدخول في **العمل الحر (Freelancing)** وبناء مصدر دخل:<br>
+• حدد خدمة واحدة واضحة تقدر تقدمها بجودة (مثلاً: تصميم واجهة، بناء صفحة ويب، إعداد محتوى أو أداة بسيطة).<br>
+• جهّز 2 أو 3 نماذج أعمال حقيقية تظهر مستواك، واكتب وصفاً دقيقاً يوضح للعميل إيه المشكلة اللي هتحلهاله ومدة التسليم.`;
+      }
+
+      const trackTitle = (ROADMAPS[trackKey] || ROADMAPS.web).title;
+      return `بخصوص سؤالك: <strong>"${question}"</strong><br>
+الإجابة بتعتمد على الهدف العملي من السؤال: لو تقصد <strong>فرص العمل والمهارات المطلوبة</strong> في هذا المجال، فالأهم هو الجمع بين الأساسيات النظرية + الخبرة/التطبيق العملي + اللغة والمهارات المطلوبة في السوق. ولو تقصد خطة تعلّم أو مقارنة بين تخصصات، وضح لي النقطة اللي تحب نركز عليها (الفرص، المهارات المطلوبة، ولا طريقة البداية) وهجاوبك بشكل مباشر عليها.`;
+    }
+
+    async function getMentorAnswer(question) {
+      const apiKey = (document.getElementById("geminiKeyInput").value || "").trim();
+      const trackTitle = (ROADMAPS[userProfile.track] || ROADMAPS.web).title;
+
+      if (apiKey) {
+        try {
+          const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`;
+          const prompt = `أنت مرشد مهني وتعليمي ذكي في منصة "مسارك الذكي". الطالب اسمه "${userProfile.name || "طالب"}"، مرحلته "${userProfile.stage}"، ومساره المختار في المنصة "${trackTitle}". أجب مباشرة وبشكل مفيد وواضح على سؤال الطالب أياً كان موضوعه، ولا تفرض عليه مساراً غير مرتبط بسؤاله إلا إذا كان مناسباً. السؤال: ${question}`;
+
+          const res = await fetch(endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              contents: [{ parts: [{ text: prompt }] }]
+            })
+          });
+
+          if (res.ok) {
+            const data = await res.json();
+            const aiText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+            if (aiText) return aiText.replace(/\n/g, "<br>");
+          }
+        } catch (err) {
+          console.warn("Gemini fallback triggered:", err);
+        }
+      }
+
+      return generateSmartLocalReply(question, userProfile.track);
+    }
+
+    document.getElementById("mentorForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const input = document.getElementById("mentorQueryInput");
+      const q = input.value.trim();
+      if (!q) return;
+
+      const log = document.getElementById("mentorChatLog");
+      log.innerHTML += `<div class="chat-msg chat-user"><strong>أنت:</strong> ${q}</div>`;
+      const thinkingId = "thinking_" + Date.now();
+      log.innerHTML += `<div class="chat-msg chat-ai" id="${thinkingId}"><strong>الموجه الذكي:</strong> جاري تحليل سؤالك...</div>`;
+      log.scrollTop = log.scrollHeight;
+      input.value = "";
+
+      const reply = await getMentorAnswer(q);
+      const thinkingEl = document.getElementById(thinkingId);
+      if (thinkingEl) {
+        thinkingEl.innerHTML = `<strong>الموجه الذكي:</strong> ${reply}`;
+      }
+      log.scrollTop = log.scrollHeight;
+    });
+  </script>
+
+  <script>
+    function openPanel(panelId, btn) {
+      ["panelQuiz", "panelRoadmap", "panelProjects", "panelMarket", "panelMentor"].forEach((id) => {
+        document.getElementById(id).classList.add("hidden");
+      });
+      document.querySelectorAll(".nav-tab").forEach((t) => t.classList.remove("active"));
+      document.getElementById(panelId).classList.remove("hidden");
+      btn.classList.add("active");
+    }
+  </script>
+</body>
+</html>
